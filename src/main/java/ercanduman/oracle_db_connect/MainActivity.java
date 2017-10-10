@@ -2,6 +2,7 @@ package ercanduman.oracle_db_connect;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -19,7 +20,9 @@ public class MainActivity {
     private static char executionType = 'S';
 
     public static void main(String[] strings) {
-        establishConnection();
+        if (establishConnection()) {
+            executeSEARCH(Constants.SQL_SEARCH);
+        }
     }
 
     private static boolean establishConnection() {
@@ -33,6 +36,23 @@ public class MainActivity {
             e.printStackTrace();
             System.out.println(prefix_error + "Database Connection is failed!");
             return false;
+        }
+    }
+
+    private static void executeSEARCH(String searchSQL) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(searchSQL);
+            resultSet = statement.executeQuery();
+
+            int i = 0;
+            System.out.println(prefix_info + "DB VALUES:");
+            while (resultSet.next()) {
+                i++;
+                String output = "%d.  %s %s\t  %s";
+                System.out.println(String.format(output, i, resultSet.getString(1), resultSet.getString(2), resultSet.getString(3)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
