@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/OracleDBConnect.iml" filepath="$PROJECT_DIR$/.idea/modules/OracleDBConnect.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/src/src.iml" filepath="$PROJECT_DIR$/.idea/modules/src/src.iml" />
     </modules>
   </component>
 </project>
