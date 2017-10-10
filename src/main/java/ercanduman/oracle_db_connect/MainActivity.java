@@ -21,7 +21,8 @@ public class MainActivity {
 
     public static void main(String[] strings) {
         if (establishConnection()) {
-            executeSEARCH(Constants.SQL_SEARCH);
+//            executeSEARCH(Constants.SQL_SEARCH);
+            executeINSERT(Constants.SQL_INSERT, "8", "NEW SQUARE", "N");
         }
     }
 
@@ -53,8 +54,29 @@ public class MainActivity {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println(prefix_error + "Error occurred while working on SEARCH SQL!");
         }
     }
+
+    //operand_id, operand_name, operand_symbol are will b inserted
+    private static void executeINSERT(String insertSQL, String operand_id, String operand_name, String operand_symbol) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(insertSQL);
+            statement.setString(1, operand_id);
+            statement.setString(2, operand_name);
+            statement.setString(3, operand_symbol);
+
+            int resultCount = statement.executeUpdate();
+            if (resultCount > 0) {
+                System.out.println(prefix_info + resultCount + " row(s) inserted!");
+            } else
+                System.out.println(prefix_info + "No row(s) inserted!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(prefix_error + "Error occurred while working on INSERT SQL!");
+        }
+    }
+
 }
 
 

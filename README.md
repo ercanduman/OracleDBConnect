@@ -15,7 +15,7 @@ All operations will be done on this table, it looks like:
 
 ### Search on Database
 
-After Search executed on table Android studio OUTPUT:
+After SEARCH executed on table Android studio OUTPUT:
 ```
 INFO> Database Connection is successful!
 
@@ -28,4 +28,26 @@ INFO> DB VALUES:
 6.  7 Module	  M
 ```
 All table's inputs are listed successfully:)
+
+### Insert on Database
+
+After INSERT executed on table Android studio OUTPUT:
+```
+INFO> Database Connection is successful!
+
+INFO> 1 row(s) inserted!
+
+```
+OUTPUT after insertion
+```
+INFO> DB VALUES:
+1.  1 Add	  +
+2.  2 Subtract	  -
+3.  3 Multiply	  *
+4.  4 Divide	  /
+5.  5 Power	  p
+6.  8 NEW SQUARE	  N
+7.  7 Module	  M
+```
+A new input (NEW SQUARE) added successfully:)
 

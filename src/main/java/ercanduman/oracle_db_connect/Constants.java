@@ -13,7 +13,7 @@ class Constants {
 
     // SQL queries
     static final String SQL_SEARCH = "SELECT * FROM eduman.operand_config_test";
-    static final String SQL_INSERT = "INSERT INTO eduman.operand_config_test (operand_id, operand_name, operand_symbol) VALUES (?, ?, ?";
+    static final String SQL_INSERT = "INSERT INTO eduman.operand_config_test (operand_id, operand_name, operand_symbol) VALUES (?, ?, ?)";
     static final String SQL_UPDATE = "UPDATE eduman.operand_config_test SET operand_name   = ?, operand_symbol = ? WHERE operand_id = ?";
     static final String SQL_DELETE = "DELETE FROM eduman.operand_config_test WHERE operand_id = ?";
 
