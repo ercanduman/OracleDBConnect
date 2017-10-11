@@ -23,6 +23,7 @@ public class MainActivity {
         if (establishConnection()) {
             executeSEARCH(Constants.SQL_SEARCH);
 //            executeINSERT(Constants.SQL_INSERT, "8", "NEW SQUARE", "N");
+//            executeUPDATE(Constants.SQL_UPDATE, "Square", "S", "8");
 
             //After operation finished close opened connections
             closeConnection();
@@ -47,6 +48,7 @@ public class MainActivity {
         if (connection != null) {
             try {
                 connection.close();
+                System.out.println(prefix_info + "Database connection closed!");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -91,13 +93,32 @@ public class MainActivity {
             if (resultCount > 0) {
                 System.out.println(prefix_info + resultCount + " row(s) inserted!");
             } else
-                System.out.println(prefix_info + "No row(s) inserted!");
+                System.out.println(prefix_info + "No rows inserted!");
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println(prefix_error + "Error occurred while working on INSERT SQL!");
         }
     }
 
+    //operand_name and operand_symbol will be updated for given operand_id.
+    private static void executeUPDATE(String updateSQL, String operand_name, String operand_symbol, String operand_id) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(updateSQL);
+            statement.setString(1, operand_name);
+            statement.setString(2, operand_symbol);
+            statement.setString(3, operand_id);
+
+            int resultCount = statement.executeUpdate();
+            if (resultCount > 0) {
+                System.out.println(prefix_info + resultCount + " row(s) updated!");
+            } else {
+                System.out.println(prefix_info + " No rows updated!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(prefix_error + "Error occurred while working on UPDATE SQL!");
+        }
+    }
 }
 
 

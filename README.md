@@ -51,3 +51,26 @@ INFO> DB VALUES:
 ```
 A new input (NEW SQUARE) added successfully:)
 
+### Update on Database
+
+After UPDATE executed on table Android studio OUTPUT:
+```
+INFO> Database Connection is successful!
+
+INFO> 1 row(s) updated!
+
+```
+OUTPUT after update
+```
+INFO> DB VALUES:
+1.  1 Add	  +
+2.  2 Subtract	  -
+3.  3 Multiply	  *
+4.  4 Divide	  /
+5.  5 Power	  p
+6.  8 Square	  S
+7.  7 Module	  M
+```
+"NEW SQUARE" updated to "Square" successfully.
+
+![image](https://user-images.githubusercontent.com/11629459/31438028-1c7a574e-ae90-11e7-93b7-ac7e64eb127d.png)
