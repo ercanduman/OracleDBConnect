@@ -16,15 +16,28 @@ public class MainActivity {
     private static Connection connection;
     private static ResultSet resultSet;
 
-    // For testing only change executionType value as S: Search, U:Update, D:Delete, I:Insert
+    // For testing only change executionType value as S: Search, U:Update, D:Delete, I:Insert, A:Wrong ExecutionType Error
     private static char executionType = 'S';
 
     public static void main(String[] strings) {
         if (establishConnection()) {
-            executeSEARCH(Constants.SQL_SEARCH);
-//            executeINSERT(Constants.SQL_INSERT, "8", "NEW SQUARE", "N");
-//            executeUPDATE(Constants.SQL_UPDATE, "Square", "S", "8");
-//            executeDELETE(Constants.SQL_DELETE, "8");
+            switch (executionType) {
+                case 'S':
+                    executeSEARCH(Constants.SQL_SEARCH);
+                    break;
+                case 'I':
+                    executeINSERT(Constants.SQL_INSERT, "8", "NEW SQUARE", "N");
+                    break;
+                case 'U':
+                    executeUPDATE(Constants.SQL_UPDATE, "Square", "S", "8");
+                    break;
+                case 'D':
+                    executeDELETE(Constants.SQL_DELETE, "8");
+                    break;
+                default:
+                    System.out.println(prefix_error + "Wrong ExecutionType! Execution Type should be one of these: (S)Search, (U)Update, (D)Delete, (I)Insert");
+                    break;
+            }
 
             //After operation finished close opened connections
             closeConnection();
@@ -64,25 +77,6 @@ public class MainActivity {
         }
     }
 
-    // Deletion will be processed based on operand_id
-    private static void executeDELETE(String deleteSQL, String operand_id) {
-        try {
-            PreparedStatement statement = connection.prepareStatement(deleteSQL);
-            statement.setString(1, operand_id);
-
-            int resultCount = statement.executeUpdate();
-            if (resultCount > 0) {
-                System.out.println(prefix_info + resultCount + " row(s) deleted!");
-            } else {
-                System.out.println(prefix_info + "No rows deleted!");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println(prefix_error + "An error occurred while working on DELETE SQL!");
-        }
-
-    }
-
     private static void executeSEARCH(String searchSQL) {
         try {
             PreparedStatement statement = connection.prepareStatement(searchSQL);
@@ -96,8 +90,7 @@ public class MainActivity {
                 System.out.println(String.format(output, i, resultSet.getString(1), resultSet.getString(2), resultSet.getString(3)));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println(prefix_error + "An error occurred while working on SEARCH SQL!");
+            System.out.println(prefix_error + "An error occurred while working on SEARCH SQL! -> " + e);
         }
     }
 
@@ -116,8 +109,7 @@ public class MainActivity {
                 System.out.println(prefix_info + "No rows inserted!");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println(prefix_error + "An error occurred while working on INSERT SQL!");
+            System.out.println(prefix_error + "An error occurred while working on INSERT SQL! -> " + e);
         }
     }
 
@@ -136,9 +128,26 @@ public class MainActivity {
                 System.out.println(prefix_info + " No rows updated!");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println(prefix_error + "An error occurred while working on UPDATE SQL!");
+            System.out.println(prefix_error + "An error occurred while working on UPDATE SQL! -> " + e);
         }
+    }
+
+    // Deletion will be processed based on operand_id
+    private static void executeDELETE(String deleteSQL, String operand_id) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(deleteSQL);
+            statement.setString(1, operand_id);
+
+            int resultCount = statement.executeUpdate();
+            if (resultCount > 0) {
+                System.out.println(prefix_info + resultCount + " row(s) deleted!");
+            } else {
+                System.out.println(prefix_info + "No rows deleted!" + " (operand_id = " + operand_id + " not found)");
+            }
+        } catch (SQLException e) {
+            System.out.println(prefix_error + "An error occurred while working on DELETE SQL! -> " + e);
+        }
+
     }
 }
 

@@ -99,3 +99,7 @@ INFO> DB VALUES:
 "Square" with operand_id = 8 deleted successfully.
 
 ![image](https://user-images.githubusercontent.com/11629459/31438975-1c4e9d18-ae93-11e7-9f69-1b53d73a8747.png)
+
+Project can be tested simply/easily with changing executionType value as (S)Search, (U)Update, (D)Delete, (I)Insert.
+
+(Android Studio 2.3.3 IDE and PLSQL DEVELOPER 12.0.4 tools had been used while working on this project.)
