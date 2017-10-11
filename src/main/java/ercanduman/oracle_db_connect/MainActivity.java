@@ -24,6 +24,7 @@ public class MainActivity {
             executeSEARCH(Constants.SQL_SEARCH);
 //            executeINSERT(Constants.SQL_INSERT, "8", "NEW SQUARE", "N");
 //            executeUPDATE(Constants.SQL_UPDATE, "Square", "S", "8");
+//            executeDELETE(Constants.SQL_DELETE, "8");
 
             //After operation finished close opened connections
             closeConnection();
@@ -48,7 +49,7 @@ public class MainActivity {
         if (connection != null) {
             try {
                 connection.close();
-                System.out.println(prefix_info + "Database connection closed!");
+                System.out.println(prefix_info + "Database Connection closed!");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -61,6 +62,25 @@ public class MainActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    // Deletion will be processed based on operand_id
+    private static void executeDELETE(String deleteSQL, String operand_id) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(deleteSQL);
+            statement.setString(1, operand_id);
+
+            int resultCount = statement.executeUpdate();
+            if (resultCount > 0) {
+                System.out.println(prefix_info + resultCount + " row(s) deleted!");
+            } else {
+                System.out.println(prefix_info + "No rows deleted!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(prefix_error + "An error occurred while working on DELETE SQL!");
+        }
+
     }
 
     private static void executeSEARCH(String searchSQL) {
@@ -77,7 +97,7 @@ public class MainActivity {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println(prefix_error + "Error occurred while working on SEARCH SQL!");
+            System.out.println(prefix_error + "An error occurred while working on SEARCH SQL!");
         }
     }
 
@@ -92,11 +112,12 @@ public class MainActivity {
             int resultCount = statement.executeUpdate();
             if (resultCount > 0) {
                 System.out.println(prefix_info + resultCount + " row(s) inserted!");
-            } else
+            } else {
                 System.out.println(prefix_info + "No rows inserted!");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println(prefix_error + "Error occurred while working on INSERT SQL!");
+            System.out.println(prefix_error + "An error occurred while working on INSERT SQL!");
         }
     }
 
@@ -116,7 +137,7 @@ public class MainActivity {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println(prefix_error + "Error occurred while working on UPDATE SQL!");
+            System.out.println(prefix_error + "An error occurred while working on UPDATE SQL!");
         }
     }
 }

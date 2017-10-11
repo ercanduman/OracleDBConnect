@@ -29,7 +29,7 @@ INFO> DB VALUES:
 ```
 All table's inputs are listed successfully:)
 
-### Insert on Database
+### Insertion on Database
 
 After INSERT executed on table Android studio OUTPUT:
 ```
@@ -74,3 +74,28 @@ INFO> DB VALUES:
 "NEW SQUARE" updated to "Square" successfully.
 
 ![image](https://user-images.githubusercontent.com/11629459/31438028-1c7a574e-ae90-11e7-93b7-ac7e64eb127d.png)
+
+
+### Deletion on Database
+
+After DELETE executed on table Android studio OUTPUT:
+```
+INFO> Database Connection is successful!
+
+INFO> 1 row(s) deleted!
+
+INFO> Database Connection closed!
+```
+OUTPUT after Delete
+```
+INFO> DB VALUES:
+1.  1 Add	  +
+2.  2 Subtract	  -
+3.  3 Multiply	  *
+4.  4 Divide	  /
+5.  5 Power	  p
+6.  7 Module	  M
+```
+"Square" with operand_id = 8 deleted successfully.
+
+![image](https://user-images.githubusercontent.com/11629459/31438975-1c4e9d18-ae93-11e7-9f69-1b53d73a8747.png)
