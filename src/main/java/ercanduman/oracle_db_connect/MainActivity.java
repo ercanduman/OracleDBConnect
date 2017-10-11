@@ -21,8 +21,11 @@ public class MainActivity {
 
     public static void main(String[] strings) {
         if (establishConnection()) {
-//            executeSEARCH(Constants.SQL_SEARCH);
-            executeINSERT(Constants.SQL_INSERT, "8", "NEW SQUARE", "N");
+            executeSEARCH(Constants.SQL_SEARCH);
+//            executeINSERT(Constants.SQL_INSERT, "8", "NEW SQUARE", "N");
+
+            //After operation finished close opened connections
+            closeConnection();
         }
     }
 
@@ -37,6 +40,24 @@ public class MainActivity {
             e.printStackTrace();
             System.out.println(prefix_error + "Database Connection is failed!");
             return false;
+        }
+    }
+
+    private static void closeConnection() {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
